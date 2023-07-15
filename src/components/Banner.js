@@ -1,49 +1,54 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import headerImg from "../assets/img/header-img.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "animate.css";
 import TrackVisibilty from "react-on-screen";
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const toRotate = ["Mechanical Engineer", "Web Developer", "Web Designer"];
+  const toRotate = useMemo (()=> ["Mechanical Engineer", "Web Developer", "Web Designer"], []);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(400 - Math.random() * 100);
   const period = 2000;
 
+  
+
+  
+
   useEffect(() => {
+
+    const tick = () => {
+      let i = loopNum % toRotate.length;
+      let fullText = toRotate[i];
+      let updatedText = isDeleting
+        ? fullText.substring(0, text.length - 1)
+        : fullText.substring(0, text.length + 1);
+      setText(updatedText);
+  
+      if (isDeleting) {
+        setDelta((prevDelta) => prevDelta / 2);
+      }
+  
+      if (!isDeleting && updatedText === fullText) {
+        setIsDeleting(true);
+        setDelta(period);
+      } else if (isDeleting && updatedText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+        setDelta(500);
+      }
+    };
+
     let ticker = setInterval(() => {
       tick();
     }, delta);
-
     return () => {
       clearInterval(ticker);
     };
-  }, [text]);
+  }, [text, delta, isDeleting, loopNum, toRotate]);
 
-  const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta((prevDelta) => prevDelta / 2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(period);
-    } else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(500);
-    }
-  };
 
   return (
     <section className="banner" id="home">
