@@ -165,7 +165,7 @@ export const Contact = () => {
     formData.append("message", formDetails.message);
 
     try {
-      const response = await fetch("https://formsubmit.co/abhiwebsite12@gmail.com", {
+      const response = await fetch("https://formsubmit.co/abhishekkulkarni0103@gmail.com", {
         method: "POST",
         body: formData,
       });
