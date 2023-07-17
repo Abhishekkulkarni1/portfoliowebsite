@@ -16,7 +16,7 @@ export const Contact = () => {
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
-  const [status, setStatus] = useState({});
+  // const [status,setStatus] = useState("");
 
   const onFormUpdate = (category, value) => {
     setFormDetails({
@@ -116,13 +116,13 @@ export const Contact = () => {
                     <span> {buttonText} </span>
                   </button>
                 </Col>
-                {status.message && (
+                {/* {status.message && (
                   <Col>
                     <p className={status.success === false ? "danger" : "success"}>
                       {status.message}
                     </p>
                   </Col>
-                )}
+                )} */}
               </Row>
             </form>
           </Col>
