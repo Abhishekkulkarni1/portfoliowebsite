@@ -149,7 +149,7 @@ export const Contact = () => {
     formData.append("message", formDetails.message);
 
     try {
-      const response = await fetch("https://formsubmit.co/pusiyuzu@mailgolem.com", {
+      const response = await fetch("https://formsubmit.co/abhiwebsite12@gmail.com", {
         method: "POST",
         body: formData,
       });
@@ -179,7 +179,7 @@ export const Contact = () => {
           <Col md={6}>
             <h2>Get In Touch With Me</h2>
             <form  onSubmit={handleSubmit}>
-              
+
               <Row>
                 <Col sm={6} className="px-1">
                   <input
